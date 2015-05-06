@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="128x28" href="{{ url_for('static', filename='images/ponos128.png') }}">
+    <title>Ponos</title>
+
+    <!-- Bootstrap -->
+    <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+<body>
+  <nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+	  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{ url_for('index') }}">Ponos</a>
+    </div>
+	
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="nav navbar-nav navbar-btn navbar-right navbar-zone">
+		<a class="badge selected_zone" data-toggle="modal" data-target="#myModal" href="#">
+		  {% if not session.selected_zone %}No zone(s) selected{% else %}{{ session.selected_zone_short_name }}{% endif %}
+		</a>
+	  </div>
+	  <ul class="nav navbar-nav">
+        <li class="{% if activenav == 'feeds' %}active{% endif %}"><a href="{{ url_for('feeds') }}">Feeds</a></li>
+        <li class="{% if activenav == 'add_feed' %}active{% endif %}"><a href="{{ url_for('add_feed') }}">Add Feed</a></li>
+		<li class="android_only hide_me"><a href="sonos://">Sonos</a></li>
+      </ul>
+	</div>
+  </div><!-- /.container-fluid -->
+  </nav>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close white" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Pick a zone</h4>
+      </div>
+      <div class="modal-body">
+		<ul class="zones entries list-unstyled">
+		  {% for zone in zones %}
+			<li><h3><a class="setZone" zone_coord="{{ zone.coordinator|safe }}" zone_short_name="{{ zone.short_name }}" post_url_setzone="{{ url_for('set_zone') }}" href="#"> {{ zone.short_name }} </a></h3>
+		  {% else %}
+			<li><em>No zone(s) selected.</em>
+		  {% endfor %}
+		</ul>	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ul class=flashes>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <li>{{ message }}</li>
+	  
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+</ul>
+
+	<div class="body">
+	{% block body %}{% endblock %}
+	</div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='Ponos.js') }}"></script>
+  </body>
+</html>

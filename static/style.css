@@ -1,0 +1,125 @@
+.table-striped>tbody>tr:nth-child(odd)>td {
+  background-color: #202020;
+}
+
+.table-no-border>thead>tr>th, 
+.table-no-border>tbody>tr>th, 
+.table-no-border>tfoot>tr>th, 
+.table-no-border>thead>tr>td, 
+.table-no-border>tbody>tr>td, 
+.table-no-border>tfoot>tr>td {
+  border-top: none; 
+}
+
+/* Adjust Menu colors - Hover */
+.navbar .nav > li > a:hover { 
+  color: #5e5e5e;
+  text-shadow: none;
+}
+
+/* Adjust Menu colors - Normal */
+.navbar .nav > li > a {
+  color: #FFFFFF;
+  text-shadow: none;
+}
+
+.duration_time, .current_time {
+  margin-top: 9px;
+}
+
+.navbar-zone {
+  margin-top: 15px;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+  color: #FFFFFF;
+  background-color: #008584;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #FFFFFF;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  background-color: #5e5e5e;
+}
+
+.navbar {
+  background: #009E9D;
+  border-color: #202020;
+  color: #FFFFFF;
+}
+
+.navbar .badge {
+  background: #D42536;
+  color: #FFFFFF;
+}
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.navbar-default .navbar-brand  {
+  color: white;
+}
+
+body {
+  color: #FFFFFF;
+  background: #000000;
+  padding-bottom: 70px;
+}
+
+body a {
+  color: #FFFFFF;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer .container-fluid{
+  margin-top: 4.5px;
+}
+
+.progress{
+  margin-top: 10.5px;
+  margin-bottom: 0px;
+}
+
+.entries {
+  margin-left: 1%;
+}
+
+.entries a {
+  color: #A06005;
+}
+
+.entries a:hover {
+  text-decoration: none;
+}
+
+.feeds_buttons, .btn-default:hover.feeds_buttons{
+  background-color: inherit;
+  border: none;
+}
+
+.modal-content {
+  background-color: #202020;
+
+}
+
+
+
+.white { color: white; }
+.brown { color: #A06005; }
+.green { color: #009D4E; }
+.purple { color: #7E51C3; }
+.pinkpurple { color: #A9218E; }
+.aqua { color: #009E9D; }
+.red { color: #f13536; }
+.yellow { color: #C1B53B; }
+.orange { color: #F7941D; }

@@ -1,0 +1,5 @@
+Flask==0.10.1
+soco==0.9
+Flask-WTF==0.10.3
+WTForms==2.0.1
+podcastparser==0.5.0

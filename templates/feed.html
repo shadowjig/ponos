@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block body %}
+
+  <ul class="feed entries list-unstyled"">
+  {% for episode in episodes %}
+    <li><h3><a class="play_episode" href="#" post_url_play="{{ url_for('play_uri') }}" media_uri="{{ episode.uri_link }}">{{ episode.title }}</a><span class="orange">&nbsp;&nbsp;&nbsp;{{  episode.duration  }}</span></h3><span class="green">{{  episode.description }}</span>
+  {% else %}
+    <li><em>No episodes available.</em>
+  {% endfor %}
+  </ul>
+{% endblock %}

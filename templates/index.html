@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+{% block body %}
+
+{% if track %}
+<div class="play_state hidden">{% if not(track.state_playing == 0) %}playing{% else %}test{% endif %}</div>
+<div class="row">
+  <div class="no-track-data col-sm-10 col-sm-offset-1 {% if not(track.title == '') %}hidden{% endif %}"><center>There are no tracks currently playing/paused.</center></div>
+  <div class="has-track-data col-sm-3 col-sm-offset-1 {% if track.title == '' %}hidden{% endif %}">
+	<center><img src="{{ track.album_art }}" class="visible-xs album_art img-responsive img-rounded" width="200px"></img></center>
+	<img src="{{ track.album_art }}" class="hidden-xs album_art img-responsive img-rounded"></img>
+  </div>
+  <div class="has-track-data col-sm-8 col-centered {% if track.title == '' %}hidden{% endif %}">
+	<span class="hidden" id="percentage"><br></span>
+	<div class="visible-xs">
+	
+	  <center>{{ track.title }}</center>
+	  <center>{{ track.artist }}</center>
+	  <center>{{ track.album }}</center>
+	</div>
+	<div class="hidden-xs">{{ track.title }}</br>{{ track.artist }}</br>{{ track.album }}</div>
+  </div>
+</div>
+{% else %}
+  <center>
+    <div><h2>
+		<div class="red">Select a zone to view currently playing track.</div>
+		<br><br>Or<br><br>
+		<a class="orange" href="{{ url_for('feeds') }}">Browse a feed</a>
+		<br>or<br>
+		<a class="green" href="{{ url_for('add_feed') }}">Add a feed</a>
+	</h2></div>
+  </center>
+{% endif %}
+
+{% if session.selected_zone %}
+<nav class="footer navbar navbar-default navbar-fixed-bottom" role="navigation">
+  <div class="container-fluid">
+    <div class="row">	
+	  <div class="col-xs-2 col-sm-1 col-md-1 visible-*-inline-block">
+	    <button type="button" class="unmute-button btn btn-default btn-lg feeds_buttons {% if not(track.state_muted == 1) %}hide_me{% endif %}"><span class="glyphicon glyphicon-volume-off white" aria-hidden="true"></span></button>
+	    <button type="button" class="mute-button btn btn-default btn-lg feeds_buttons {% if not(track.state_muted == 0) %}hide_me{% endif %}"><span class="glyphicon glyphicon-volume-up white" aria-hidden="true"></span></button>
+	  </div>
+	  
+	  <div class="hidden-xs col-xs-5 col-sm-8 col-md-9 visible-*-inline-block">
+		<div class="current_time col-xs-3 col-sm-2 col-md-1 visible-*-inline-block text-right"><span id="track_pos1">{{ track.position|formattracktime }}</span></div>
+	    <div class="col-xs-6 col-sm-8 col-md-10 visible-*-inline-block">
+		  <div class="progress">
+		  <div class="progress-bar" role="progressbar" aria-valuenow="{{ track.percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ track.precent }}%;" current_secs="{{ track.current_secs }}" duration_secs="{{ track.duration_secs }}">
+		    <span class="sr-only">{{ track.precent }}% Complete</span>
+	      </div>
+		  </div>
+		</div>
+		<div class="duration_time col-xs-3 col-sm-2 col-md-1 visible-*-inline-block">{{ track.duration|formattracktime }}</div>
+      </div>
+	  
+	  <div class="col-xs-5 col-sm-3 col-md-2 visible-*-inline-block">
+	  <button type="button" class="skip-back-button btn btn-default btn-lg feeds_buttons"><span class="glyphicon glyphicon-repeat white" aria-hidden="true"></span></button>
+      <button type="button" class="play-button btn btn-default btn-lg feeds_buttons {% if not(track.state_playing == 0) %}hide_me{% endif %}">
+	    <span class="glyphicon glyphicon-play white" aria-hidden="true"></span>
+	  </button>
+	  <button type="button" class="pause-button btn btn-default btn-lg feeds_buttons {% if not(track.state_playing == 1) %}hide_me{% endif %}"><span class="glyphicon glyphicon-pause white" aria-hidden="true"></span></button>
+	  </div>
+    </div>
+	<div class="row hidden-sm hidden-md hidden-lg">
+	  <div class="col-xs-12 visible-*-inline-block">
+		<div class="current_time col-xs-2 visible-*-inline-block text-right"><span id="track_pos2">{{ track.position|formattracktime }}</span></div>
+	    <div class="col-xs-8 visible-*-inline-block">
+		  <div class="progress">
+		  <div class="progress-bar" role="progressbar" aria-valuenow="{{ track.percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ track.precent }}%;" current_secs="{{ track.current_secs }}" duration_secs="{{ track.duration_secs }}">
+		    <span class="sr-only">{{ track.precent }}% Complete</span>
+	      </div>
+		  </div>
+		</div>
+		<div class="col-xs-2 visible-*-inline-block duration_time">{{ track.duration|formattracktime }}</div>
+      </div>
+	</div>
+  </div>
+</nav>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<form role="form" class="form-horizontal" method="POST" action="{{ form_action }}">
+{{ form.csrf_token }}
+{{ form.feed_id }}
+<div class="text-center"><h2>{{ title }}</h2></div>
+  <div class="form-group">
+    <label class="col-xs-2 control-label">URL</label>
+	<div class="col-xs-8">
+	  {{ form.feed_url(placeholder="Enter Feed URL", class_="inputURL form-control") }}
+    </div>
+  </div>
+  <div class="form-group">
+	<div class="col-xs-8 col-xs-offset-2">
+	<div class="text-center">
+	  <div class="fetch_title_button btn btn-warning" post_url="{{ url_for('fetch_feed_title') }}">
+	    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>&nbsp;Fetch Title
+	  </div>
+	</div>
+    </div>
+  </div>
+  <div class="form-group">
+	<label class="col-xs-2 control-label">Title</label>
+	<div class="col-xs-8">
+      {{ form.feed_title(placeholder="Enter Feed Title", class_="inputTitle form-control") }}
+	</div>
+  </div>
+  <div class="col-xs-8 col-xs-offset-2">
+	<div class="text-center">
+	  <button type="submit" class="btn btn-success">{{ title }}</button>
+      <a href="{{ url_for('feeds') }}" class="btn btn-danger">Cancel</a>
+	</div>
+  </div>
+</form>
+
+
+{% endblock %}
